@@ -46,7 +46,7 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
             List<String> strings = bufferedReader.lines().collect(Collectors.toList());
             inputStream.close();
 
-            lastNumbers = Integer.parseInt(strings.get(strings.size() - 1).substring(0, strings.get(strings.size() - 1).indexOf(";")));
+//            lastNumbers = Integer.parseInt(strings.get(strings.size() - 1).substring(0, strings.get(strings.size() - 1).indexOf(";")));
             for (int i = 0; i < strings.size(); i++) {
                 CalculationResult calculationResult = new CalculationResult(Integer.parseInt(strings.get(i).substring(0, strings.get(i).indexOf(";"))), Integer.parseInt(strings.get(i).substring(strings.get(i).indexOf(";") + 2)));
                 newCalculationResult.add(calculationResult);
@@ -91,28 +91,29 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
             System.out.println(minBorder);
             System.out.println(maxBorder);
         }
-        newFileSaveResult(borderIteration);
+//        newFileSaveResult(borderIteration);
+        fileSaveResult();
         return allTimeCalculation;
     }
 
-    public void fileSaveResult(List<Integer> timeCalculation) throws FileNotFoundException {
-        OutputStream outputStream = new FileOutputStream("ResultTimeCalculation.csv", true);
+    public void fileSaveResult() throws FileNotFoundException {
+        OutputStream outputStream = new FileOutputStream("NewMemoryEratosphenResultTimeCalculation.csv", true);
             PrintWriter writer = new PrintWriter(outputStream);
-        System.out.println(timeCalculation.size());
-        System.out.println("lastNumbers = " + lastNumbers);
+//        System.out.println(timeCalculation.size());
+//        System.out.println("lastNumbers = " + lastNumbers);
         writer.println("");
-        for (int i = 0; i < timeCalculation.size() - 1; i++) {
+        for (int i = 0; i < newCalculationResult.size() - 1; i++) {
 //            writer.println((i + 2) + "; " + timeCalculation.get(i));
-            if(i == timeCalculation.size() - 2){
-                writer.print(i + 1 +"; " + timeCalculation.get(1 + i));
+            if(i == newCalculationResult.size() - 2){
+                writer.print(i + 1 +"; " + newCalculationResult.get(1 + i).timeCalculation);
             } else {
-                writer.println(i + 1 + "; " + timeCalculation.get(1 + i));
+                writer.println(i + 1 + "; " + newCalculationResult.get(1 + i).timeCalculation);
             }
         }
         writer.close();
     }
     public void newFileSaveResult(Integer borderIteration) throws FileNotFoundException {
-        OutputStream outputStream = new FileOutputStream("ResultTimeCalculation.csv", true);
+        OutputStream outputStream = new FileOutputStream("EratosphenResultTimeCalculation.csv", true);
         PrintWriter writer = new PrintWriter(outputStream);
         System.out.println(newCalculationResult.size());
 //        System.out.println("lastNumbers = " + lastNumbers);

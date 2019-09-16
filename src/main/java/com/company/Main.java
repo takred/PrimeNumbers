@@ -8,18 +8,20 @@ public class Main {
     public static void main(String[] args) throws IOException {
         long currentTime = System.currentTimeMillis();
         System.out.println("ЗАРАБОТАЛ! ЗАРАБОТАЛ! ЗАРАБОТА-А-АЛ!!!");
-        PrimeNumbers brutePrimes = new BrutePrimes();
+//        PrimeNumbers brutePrimes = new BrutePrimes();
+        PrimeNumbers brutePrimes = new EratosphenPrimes();
 //        List<Integer> listSimpleNumbers =  brutePrimes.getAllPrimes(2000);
 //        for (int i = 0; i < listSimpleNumbers.size(); i++) {
 //            System.out.println(listSimpleNumbers.get(i));
 //        }
-        PrimeTimings primeTimings = new PrimeTimings("ResultTimeCalculation.csv", brutePrimes);
+        PrimeTimings primeTimings = new PrimeTimings("NewMemoryEratosphenResultTimeCalculation.csv", brutePrimes);
 //        PrimeTimings primeTimings = new PrimeTimings(brutePrimes);
 //        primeTimings.getAllPrimes(2000);
 //        primeTimings.fileSaveResult(listSimpleNumbers);
 //        primeTimings.getAllPrimesThreeBorder(primeTimings.getList().size() - 1, primeTimings.getList().size() - 1 + 500, 10);
+        primeTimings.getAllPrimes(60000);
         System.out.println(primeTimings.newCalculationResult.size());
-        primeTimings.kakoytoMethod(primeTimings.newCalculationResult.get(primeTimings.newCalculationResult.size() - 1).border, 100, 10);
+//        primeTimings.kakoytoMethod(primeTimings.newCalculationResult.get(primeTimings.newCalculationResult.size() - 1).border, 100, 10);
 //        primeTimings.getAllPrimesThreeBorder(primeTimings.getNewList().get(primeTimings.getNewList().size() - 1).border, primeTimings.getNewList().get(primeTimings.getNewList().size() - 1).border + 100, 10);
 //        for (int i = 0; i < primeTimings.getList().size(); i++) {
 //            System.out.println(i + 2 + " " + primeTimings.getList().get(i));

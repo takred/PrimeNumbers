@@ -5,12 +5,11 @@ import java.util.List;
 
 public class MainTwo {
     public static void main(String[] args) throws IOException {
-        EratosphenPrimes eratosphenPrimes = new EratosphenPrimes();
-        List<Integer> primeNumbers = eratosphenPrimes.getAllPrimes(100);
+        PrimeNumbers eratosphenPrimes = new BrutePrimes();
+//        List<Integer> primeNumbers = eratosphenPrimes.getAllPrimes(10000);
+        List<Integer> primeNumbers = eratosphenPrimes.getAllPrimes(10000);
         for (int i = 0; i < primeNumbers.size(); i++) {
-            if (primeNumbers.get(i) != -1){
                 System.out.println(primeNumbers.get(i));
-            }
         }
     }
 }
