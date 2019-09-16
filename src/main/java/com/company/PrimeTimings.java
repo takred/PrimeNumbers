@@ -56,28 +56,28 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
     }
 
     public List<Integer> getAllPrimes(int border) throws FileNotFoundException {
-        List<Integer> timeCalculation = new ArrayList<>();
-        for (int i = 2; i < border + 1; i++) {
-            long currentTime = System.currentTimeMillis();
-            primeNumbers.getAllPrimes(i);
-            long endTime = System.currentTimeMillis();
-            timeCalculation.add((int) (endTime - currentTime));
-            System.out.println(i);
-        }
-        fileSaveResult(timeCalculation);
-        return timeCalculation;
+//        List<Integer> timeCalculation = new ArrayList<>();
+//        for (int i = 2; i < border + 1; i++) {
+//            long currentTime = System.currentTimeMillis();
+//            primeNumbers.getAllPrimes(i);
+//            long endTime = System.currentTimeMillis();
+//            timeCalculation.add((int) (endTime - currentTime));
+//            System.out.println(i);
+//        }
+//        fileSaveResult(timeCalculation);
+        return getAllPrimesThreeBorder(2, border, 1);
     }
     public List<Integer> getAllPrimesTwoBorder(int minBorder, int maxBorder) throws FileNotFoundException {
 //        List<Integer> timeCalculation = new ArrayList<>();
-        for (; minBorder < maxBorder + 2; minBorder++) {
-            long currentTime = System.currentTimeMillis();
-            primeNumbers.getAllPrimes(minBorder);
-            long endTime = System.currentTimeMillis();
-            allTimeCalculation.add((int) (endTime - currentTime));
-            System.out.println(minBorder + 1);
-        }
-        fileSaveResult(allTimeCalculation);
-        return allTimeCalculation;
+//        for (; minBorder < maxBorder + 2; minBorder++) {
+//            long currentTime = System.currentTimeMillis();
+//            primeNumbers.getAllPrimes(minBorder);
+//            long endTime = System.currentTimeMillis();
+//            allTimeCalculation.add((int) (endTime - currentTime));
+//            System.out.println(minBorder + 1);
+//        }
+//        fileSaveResult(allTimeCalculation);
+        return getAllPrimesThreeBorder(minBorder, maxBorder, 1);
     }
 
     public List<Integer> getAllPrimesThreeBorder(Integer minBorder, Integer maxBorder, Integer borderIteration) throws FileNotFoundException {
@@ -127,21 +127,26 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
         }
         writer.close();
     }
-    public void kakoytoMethod(int borderMsec) throws FileNotFoundException {
-        List<Integer> timeCalculation = new ArrayList<>();
-        for (int i = 10;; i = i + 10) {
+    public void kakoytoMethod(int minBorder, int borderMsec, int borderIteration) throws FileNotFoundException {
+//        List<Integer> timeCalculation = new ArrayList<>();
+        for (int i = minBorder;; i = i + borderIteration) {
             long currentTime = System.currentTimeMillis();
             primeNumbers.getAllPrimes(i);
             long endTime = System.currentTimeMillis();
-            timeCalculation.add((int) (endTime - currentTime));
+            CalculationResult calculationResult = new CalculationResult(i, (int) (endTime - currentTime));
+//            timeCalculation.add((int) (endTime - currentTime));
+            newCalculationResult.add(calculationResult);
             System.out.println(i);
 
-            if (timeCalculation.size() > 2 && (timeCalculation.get(i - (10 * (i / 10))) >= borderMsec &&
-                    timeCalculation.get(i - (10 * (i / 10) + 1)) >= borderMsec && timeCalculation.get(i - (10 * (i / 10) + 2)) >= borderMsec)) {
+//            if (newCalculationResult.size() > 2 && (newCalculationResult.get(i - (10 * (i / 10))).timeCalculation >= borderMsec &&
+//                    newCalculationResult.get(i - (10 * (i / 10) + 1)).timeCalculation >= borderMsec && newCalculationResult.get(i - (10 * (i / 10) + 2)).timeCalculation >= borderMsec)) {
+            if (newCalculationResult.size() > 2 && (newCalculationResult.get(newCalculationResult.size() - 1).timeCalculation >= borderMsec &&
+                    newCalculationResult.get(newCalculationResult.size() - 2).timeCalculation >= borderMsec && newCalculationResult.get(newCalculationResult.size() - 3).timeCalculation >= borderMsec)){
                 break;
             }
         }
-        fileSaveResult(timeCalculation);
+        newFileSaveResult(borderIteration);
+//        fileSaveResult(timeCalculation);
     }
     public void eschoMethod(int minBorder, int maxBorder){
         List<Integer> timeCalculation = new ArrayList<>();
