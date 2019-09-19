@@ -3,14 +3,14 @@ package com.company;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public class PrimeGeneratorComporator {
+public class PrimeGeneratorComparator {
     private PrimeNumbers firstPrimeNumbers;
     private PrimeNumbers secondPrimeNumbers;
-    public PrimeGeneratorComporator(PrimeNumbers firstPrimeNumbers, PrimeNumbers secondPrimeNumbers){
+    public PrimeGeneratorComparator(PrimeNumbers firstPrimeNumbers, PrimeNumbers secondPrimeNumbers){
         this.firstPrimeNumbers = firstPrimeNumbers;
         this.secondPrimeNumbers = secondPrimeNumbers;
     }
-    public boolean Compare(int border) throws FileNotFoundException {
+    public boolean compare(int border) throws FileNotFoundException {
         List<Integer> firstAllPrimeNumbers = firstPrimeNumbers.getAllPrimes(border);
         List<Integer> secondAllPrimeNumbers = firstPrimeNumbers.getAllPrimes(border);
         for (int i = 0; i < firstAllPrimeNumbers.size(); i++) {

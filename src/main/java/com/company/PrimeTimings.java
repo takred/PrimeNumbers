@@ -10,6 +10,7 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
     private PrimeNumbers primeNumbers;
     public List<Integer> allTimeCalculation = new ArrayList<>();
     public int lastNumbers;
+    public int saveTime;
     public List<CalculationResult> newCalculationResult = new ArrayList<>();
 
     public PrimeTimings(PrimeNumbers primeNumbers) {
@@ -35,7 +36,8 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
 //        }
 //
 //    }
-    public PrimeTimings(String fileName, PrimeNumbers primeNumbers) throws IOException {
+    public PrimeTimings(String fileName, PrimeNumbers primeNumbers, int saveTime) throws IOException {
+        this.saveTime = saveTime;
         this.primeNumbers = primeNumbers;
         File file = new File(fileName);
         if (!file.exists()) {
@@ -59,38 +61,15 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
             } else {
                 lastNumbers = 1;
             }
-//            for (int i = 0; i < strings.size(); i++) {
-//                CalculationResult calculationResult = new CalculationResult(Integer.parseInt(strings.get(i).substring(0, strings.get(i).indexOf(";"))),
-//                        Integer.parseInt(strings.get(i).substring(strings.get(i).indexOf(";") + 2)));
-//                newCalculationResult.add(calculationResult);
-//            }
         }
 
     }
 
     public List<Integer> getAllPrimes(int border, String fileSave) throws IOException {
-//        List<Integer> timeCalculation = new ArrayList<>();
-//        for (int i = 2; i < border + 1; i++) {
-//            long currentTime = System.currentTimeMillis();
-//            primeNumbers.getAllPrimes(i);
-//            long endTime = System.currentTimeMillis();
-//            timeCalculation.add((int) (endTime - currentTime));
-//            System.out.println(i);
-//        }
-//        fileSaveResult(timeCalculation);
         return getAllPrimesThreeBorder(2, border, 1, fileSave);
     }
 
     public List<Integer> getAllPrimesTwoBorder(int minBorder, int maxBorder, String fileSave) throws IOException {
-//        List<Integer> timeCalculation = new ArrayList<>();
-//        for (; minBorder < maxBorder + 2; minBorder++) {
-//            long currentTime = System.currentTimeMillis();
-//            primeNumbers.getAllPrimes(minBorder);
-//            long endTime = System.currentTimeMillis();
-//            allTimeCalculation.add((int) (endTime - currentTime));
-//            System.out.println(minBorder + 1);
-//        }
-//        fileSaveResult(allTimeCalculation);
         return getAllPrimesThreeBorder(minBorder, maxBorder, 1, fileSave);
     }
 
@@ -104,7 +83,7 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
             long endTime = System.currentTimeMillis();
             CalculationResult calculationResult = new CalculationResult(minBorder, (int) (endTime - currentTime));
             newCalculationResult.add(calculationResult);
-            if (lastSaveTime != 0 && endTime - lastSaveTime >= 200){
+            if (lastSaveTime != 0 && endTime - lastSaveTime >= saveTime * 1000){
                 newFileSaveResult(borderIteration, fileSave);
                 lastSaveTime = System.currentTimeMillis();
             } else if (lastSaveTime == 0){
@@ -122,11 +101,8 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
     public void fileSaveResult(String fileName) throws FileNotFoundException {
         OutputStream outputStream = new FileOutputStream(fileName, true);
         PrintWriter writer = new PrintWriter(outputStream);
-//        System.out.println(timeCalculation.size());
-//        System.out.println("lastNumbers = " + lastNumbers);
         writer.println("");
         for (int i = 0; i < newCalculationResult.size() - 1; i++) {
-//            writer.println((i + 2) + "; " + timeCalculation.get(i));
             if (i == newCalculationResult.size() - 2) {
                 writer.print(i + 1 + "; " + newCalculationResult.get(1 + i).timeCalculation);
             } else {
@@ -142,7 +118,6 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
         PrintWriter writer = new PrintWriter(outputStream);
         System.out.println(newCalculationResult.size());
         System.out.println("lastNumbers = " + lastNumbers);
-//        writer.println("");
 
         File file = new File(fileSave);
         if (!file.exists()) {
@@ -161,7 +136,6 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
             inputStream.close();
         }
         for (int i = lastNumbers - 1; i < newCalculationResult.size(); i++) {
-//            writer.println((i + 2) + "; " + timeCalculation.get(i));
             if (i == newCalculationResult.size() - 1) {
                 writer.print(newCalculationResult.get(i).border + "; " + newCalculationResult.get(i).timeCalculation);
             } else {
@@ -172,14 +146,11 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
         writer.close();
     }
 
-    public void kakoytoMethod(int minBorder, int borderMsec, int borderIteration, String fileName) throws IOException {
-//        List<Integer> timeCalculation = new ArrayList<>();
-        for (int i = minBorder; ; i = i + borderIteration) {
+    public void kakoytoMethod(int minBorder, int borderMsec, int borderIteration, String fileName) throws IOException { for (int i = minBorder; ; i = i + borderIteration) {
             long currentTime = System.currentTimeMillis();
             primeNumbers.getAllPrimes(i);
             long endTime = System.currentTimeMillis();
             CalculationResult calculationResult = new CalculationResult(i, (int) (endTime - currentTime));
-//            timeCalculation.add((int) (endTime - currentTime));
             newCalculationResult.add(calculationResult);
             System.out.println(i);
 
@@ -191,7 +162,6 @@ public class PrimeTimings /*implements PrimeNumbers*/ {
             }
         }
         newFileSaveResult(borderIteration, fileName);
-//        fileSaveResult(timeCalculation);
     }
 
     public void eschoMethod(int minBorder, int maxBorder) {
